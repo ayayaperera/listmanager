@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ lista }}{% endblock %}
+
+{% block body %}
+    <h2>{{ lista }} lista</h2>
+
+    {% if checkboxes|length > 0 %}
+        {% for checkbox in checkboxes %}
+            <p>{{ checkbox }}</p>
+        {% endfor %}
+    {% else %}
+        <div>No checkboxes have been posted yet for this lista.</div>
+    {% endif %}
+{% endblock %}
