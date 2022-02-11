@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkboxes{% endblock %}
+
+{% block body %}
+    <h1 class="my-4">Checkboxes</h1>
+
+    <ul class="list-group">
+        {% for checkbox in checkboxes %}
+            <li class="list-group-item">
+                {{ checkbox }}
+                <span class="ms-auto">
+                    <a href="{{ path('checkbox', { id: checkbox.id }) }}">View</a>
+                    <a href="{{ path('checkboxDelete', { id: checkbox.id }) }}">Delete</a>
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('checkboxCreate')}}" class="btn btn-success mt-4">New</a>
+
+{% endblock %}

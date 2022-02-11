@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Etiquetas{% endblock %}
+
+{% block body %}
+    <h1 class="my-4">Etiquetas</h1>
+
+    <ul class="list-group">
+        {% for etiqueta in etiquetas %}
+            <li class="list-group-item">
+                {{ etiqueta }}
+                <span class="ms-auto">
+                    <a href="{{ path('etiqueta', { id: etiqueta.id }) }}">View</a>
+                    <a href="{{ path('etiquetaDelete', { id: etiqueta.id }) }}">Delete</a>
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('etiquetaCreate')}}" class="btn btn-success mt-4">New</a>
+
+{% endblock %}
+

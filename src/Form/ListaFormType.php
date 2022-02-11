@@ -2,21 +2,20 @@
 
 namespace App\Form;
 
-use App\Entity\Checkbox;
+use App\Entity\Lista;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CheckboxFormType extends AbstractType
+class ListaFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nombre')
-            ->add('info')
-            ->add('estado')
-            ->add('lista')
+            ->add('fecha')
+            ->add('etiqueta')
             ->add('submit', SubmitType::class)
         ;
     }
@@ -24,7 +23,7 @@ class CheckboxFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Checkbox::class,
+            'data_class' => Lista::class,
         ]);
     }
 }

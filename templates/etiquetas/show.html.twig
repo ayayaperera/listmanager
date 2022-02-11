@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ etiqueta }}{% endblock %}
+
+{% block body %}
+    <h2>{{ etiqueta }} etiqueta</h2>
+
+    {{ form(etiqueta_form) }}
+{% endblock %}

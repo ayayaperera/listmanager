@@ -3,13 +3,20 @@
 {% block title %}Listas{% endblock %}
 
 {% block body %}
-    <h1>Listas</h1>
+    <h1 class="my-4">Listas</h1>
 
-    {% for lista in listas %}
-    <h4>{{ lista }}</h4>
-    <p>
-        <a href="{{ path('lista', { id: lista.id }) }}">View</a>
-    </p>
-    {% endfor %}
+    <ul class="list-group">
+        {% for lista in listas %}
+            <li class="list-group-item">
+                {{ lista }}
+                <span class="ms-auto">
+                    <a href="{{ path('lista', { id: lista.id }) }}">View</a>
+                    <a href="{{ path('listaDelete', { id: lista.id }) }}">Delete</a>
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('listaCreate')}}" class="btn btn-success mt-4">New</a>
 
 {% endblock %}

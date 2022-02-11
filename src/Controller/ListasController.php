@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Checkbox;
 use App\Entity\Lista;
-use App\Form\CheckboxFormType;
-use App\Repository\CheckboxRepository;
+use App\Form\ListaFormType;
 use App\Repository\ListaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +23,7 @@ class ListasController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/', name: 'homepage')]
+    #[Route('/listas', name: 'listas')]
     public function index(ListaRepository $listaRepository): Response
     {
         return new Response($this->twig->render('listas/index.html.twig', [
@@ -33,26 +31,53 @@ class ListasController extends AbstractController
         ]));
     }
 
-    #[Route('/lista/{id}', name: 'lista')]
-    public function show(Request $request, Lista $lista, ListaRepository $listaRepository, CheckboxRepository $checkboxRepository): Response
+    #[Route('/listas/create', name: 'listaCreate')]
+    public function new(Request $request, ListaRepository $listaRepository): Response
     {
-        $checkbox = new Checkbox();
-        $form = $this->createForm(CheckboxFormType::class, $checkbox);
+        $lista = new Lista();
+        $form = $this->createForm(ListaFormType::class, $lista);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $checkbox->setLista($lista);
-
-            $this->entityManager->persist($checkbox);
+            $this->entityManager->persist($lista);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('lista', ['id' => $lista->getId()]);
+            return $this->redirectToRoute('listas');
         }
 
         return new Response($this->twig->render('listas/show.html.twig', [
             'listas' => $listaRepository->findAll(),
             'lista' => $lista,
-            'checkboxes' => $checkboxRepository->findBy(['lista' => $lista]),
-            'checkbox_form' => $form->createView(),
+            'list_form' => $form->createView(),
         ]));
+    }
+
+    #[Route('/listas/{id}', name: 'lista')]
+    public function show(Request $request, Lista $lista, ListaRepository $listaRepository): Response
+    {
+    
+        $form = $this->createForm(ListaFormType::class, $lista);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($lista);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('listas');
+        }
+
+        return new Response($this->twig->render('listas/show.html.twig', [
+            'listas' => $listaRepository->findAll(),
+            'lista' => $lista,
+            'list_form' => $form->createView(),
+        ]));
+    }
+
+    #[Route('/listas/delete/{id}', name: 'listaDelete')]
+    public function delete(Request $request, Lista $lista, ListaRepository $listaRepository): Response
+    {
+        $this->entityManager->remove($lista);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('listas');
+        
     }
 }

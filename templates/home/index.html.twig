@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRUD{% endblock %}
+
+{% block body %}
+
+<div class="d-flex mt-4">
+    <div class="card mx-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Listas</h5>
+            <p class="card-text">Aqui puede consultar las listas</p>
+            <a href="{{ path('listas')}}" class="btn btn-primary">Ver</a>
+        </div>
+    </div>
+
+    <div class="card mx-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Checkboxes</h5>
+            <p class="card-text">Aqui puede consultar los checkboxes</p>
+            <a href="{{ path('checkboxes')}}" class="btn btn-primary">Ver</a>
+        </div>
+    </div>
+
+    <div class="card mx-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Etiquetas</h5>
+            <p class="card-text">Aqui puede consultar las etiquetas</p>
+            <a href="{{ path('etiquetas')}}" class="btn btn-primary">Ver</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
