@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CheckboxRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CheckboxRepository::class)]
 class Checkbox
@@ -14,6 +15,7 @@ class Checkbox
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $nombre;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
