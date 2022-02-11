@@ -16,7 +16,6 @@ class CheckboxFormType extends AbstractType
             ->add('nombre')
             ->add('info')
             ->add('estado')
-            ->add('lista')
             ->add('submit', SubmitType::class)
         ;
     }
