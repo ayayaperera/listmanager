@@ -14,6 +14,15 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            <h1><a href="{{ path('homepage') }}">Listas</a></h1>
+            <ul>
+            {% for lista in listas %}
+                <li><a href="{{ path('lista', { id: lista.id }) }}">{{ lista }}</a></li>
+            {% endfor %}
+            </ul>
+            <hr />
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>

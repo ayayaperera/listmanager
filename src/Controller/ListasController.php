@@ -28,9 +28,10 @@ class ListasController extends AbstractController
     }
 
     #[Route('/lista/{id}', name: 'lista')]
-    public function show(Lista $lista, CheckboxRepository $checkboxRepository): Response
+    public function show(Lista $lista, ListaRepository $listaRepository, CheckboxRepository $checkboxRepository): Response
     {
         return new Response($this->twig->render('listas/show.html.twig', [
+            'listas' => $listaRepository->findAll(),
             'lista' => $lista,
             'checkboxes' => $checkboxRepository->findBy(['lista' => $lista]),
         ]));

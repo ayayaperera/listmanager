@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ListaRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Lista
 {
     #[ORM\Id]
@@ -89,6 +90,12 @@ class Lista
         }
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setFechaValue()
+    {
+        $this->fecha = new \DateTimeImmutable();
     }
 
     public function getEtiqueta(): ?Etiqueta
